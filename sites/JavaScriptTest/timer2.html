@@ -1,0 +1,71 @@
+<html>
+<head>
+<title>Countdown</title>
+<script type="text/javascript">
+// set minutes
+var mins = 75;
+var cit = 0;
+
+// calculate the seconds
+var secs = mins * 60;
+function countdown() {
+	setTimeout('Decrement(0)',1000);
+}
+function Decrement() {
+	if (document.getElementById) {
+		minutes = document.getElementById("minutes");
+		seconds = document.getElementById("seconds");
+		
+		// Debugging
+		//secreturn = document.getElementById("secreturn");
+		//secreturn.value = secs;
+		
+		// Change in time
+		if (cit != 0) {
+			secs = secs - cit;
+			cit = 0;
+		}
+		
+		// Only loop until 0
+		if (secs >= 0) {
+			seconds.value = secs;
+			minutes.value = getminutes();
+			seconds.value = getseconds();
+		} else {
+			minutes.value = "EXPIRED";
+			seconds.value = "EXPIRED";
+		}
+
+		secs--;
+		setTimeout('Decrement()',1000);
+	}
+}
+function getminutes() {
+	// minutes is seconds divided by 60, rounded down
+	mins = Math.floor(secs / 60);
+	return mins;
+}
+function getseconds() {
+	// take mins remaining (as seconds) away from total seconds remaining
+	return secs-Math.round(mins *60);
+}
+function minusTime(value) {
+	cit = value * 60;
+}
+</script>
+</head>
+<body>
+
+<div id="timer">
+	This is only valid for the next <input id="minutes" type="text" style="width: 56px; border: none; background-color:none; font-size: 16px; font-weight: bold;"> minutes and <input id="seconds" type="text" style="width: 56px; border: none; background-color:none; font-size: 16px; font-weight: bold;"> seconds.
+	<!--Seconds return: <input id="secreturn" type="text" style= "width: 56px; border: none; background-color:none; font-size: 16px; font-weight: bold;">-->
+
+</div>
+<div id="buttons">
+	<button onclick="minusTime(1)">Minus 1 Minute</button>
+	<button onclick="minusTime(5)">Minus 5 Minutes</button>
+	<button onclick="minusTime(10)">Minus 10 Minutes</button>
+</div>
+<script>
+countdown();
+</script>
