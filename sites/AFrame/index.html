@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>360&deg; Image Gallery</title>
+    <meta name="description" content="360&deg; Image Gallery - A-Frame">
+    <script src="https://aframe.io/releases/0.5.0/aframe.min.js"></script>
+    <script src="https://npmcdn.com/aframe-animation-component@3.0.1"></script>
+    <script src="https://npmcdn.com/aframe-event-set-component@3.0.1"></script>
+    <script src="https://npmcdn.com/aframe-layout-component@3.0.1"></script>
+    <script src="https://npmcdn.com/aframe-template-component@3.1.1"></script>
+    <script src="components/set-image.js"></script>
+  </head>
+  <body>
+    <a-scene>
+      <a-assets>
+		<audio id="click-sound" crossorigin="anonymous" src="https://cdn.aframe.io/360-image-gallery-boilerplate/audio/click.ogg"></audio>
+	  
+		<img id="background" crossorigin="anonymous" src="https://github.com/dlchoate/dlchoate.github.io/blob/master/sites/AFrame/Images/26363697850_53505495a2_o.png">
+		<img id="wscc" crossorigin="anonymous" src="images/wscc.png">
+		<img id="giftest" crossorigin="anonymous" src="images/IgnDYD9.gif">
+	  
+        <img id="desert-thumb" crossorigin="anonymous" src="images/thumb-desert.jpg">
+        <img id="forest-thumb" crossorigin="anonymous" src="images/thumb-forest.jpg">
+        <img id="tundra-thumb" crossorigin="anonymous" src="images/thumb-tundra.jpg">
+		
+		<img id="desert" crossorigin="anonymous" src="images/panorama-u_yYtXPcGqFtbKUiWn6xkA-3.png">
+        <img id="forest" crossorigin="anonymous" src="images/panorama-OAlCDXtnOgde7vRDEgy5kg-3.png">
+        <img id="tundra" crossorigin="anonymous" src="images/panorama-NvEa9h4mI9jHb-snUebhsQ-3.png"<!--src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/sechelt.jpg"-->>
+
+        <!-- Image link template to be reused. -->
+        <script id="link" type="text/html">
+          <a-entity class="link"
+            geometry="primitive: plane; height: 1; width: 1"
+            material="shader: flat; src: ${thumb}"
+            event-set__1="_event: mousedown; scale: 1 1 1"
+            event-set__2="_event: mouseup; scale: 1.2 1.2 1"
+            event-set__3="_event: mouseenter; scale: 1.2 1.2 1"
+            event-set__4="_event: mouseleave; scale: 1 1 1"
+            set-image="on: click; target: #image-360; src: ${src}"
+            sound="on: click; src: #click-sound"></a-entity>
+        </script>
+      </a-assets>
+
+      <!-- 360-degree image. -->
+      <a-sky id="image-360" radius="10" src="#background"></a-sky>
+
+	  <!-- Generic Text and Image. -->
+	  <a-image src="#wscc" position="-1.024 0 -4.129" rotation="0 0 0" scale="1 1 1" visible="true"></a-image>
+	  <a-text position="-0.548 0.301 -4.005" rotation="0 0 0" scale="2 2 2" visible="true" text="anchor:align;width:5;value:[Biomes];height:0;color:#cacaca"></a-text>
+	  <a-text position="-0.132 -0.093 -4.005" rotation="0 0 0" scale="2 2 2" visible="true" text="anchor:align;width:5;value:A WSCC Project;height:0;color:#cacaca"></a-text>
+	  
+      <!-- Image links. -->
+      <a-entity id="links" layout="type: line; margin: 1.5" position="0 -1 -4">
+        <a-entity template="src: #link" data-src="#desert" data-thumb="#desert-thumb"></a-entity>
+        <a-entity template="src: #link" data-src="#forest" data-thumb="#forest-thumb"></a-entity>
+        <a-entity template="src: #link" data-src="#tundra" data-thumb="#tundra-thumb"></a-entity>
+      </a-entity>
+
+      <!-- Camera + cursor. -->
+      <a-entity camera look-controls>
+        <a-cursor id="cursor"
+          animation__click="property: scale; startEvents: click; from: 0.1 0.1 0.1; to: 1 1 1; dur: 150"
+          animation__fusing="property: fusing; startEvents: fusing; from: 1 1 1; to: 0.1 0.1 0.1; dur: 1500"
+          event-set__1="_event: mouseenter; color: springgreen"
+          event-set__2="_event: mouseleave; color: black"
+          fuse="true"
+          raycaster="objects: .link"></a-cursor>
+      </a-entity>
+    </a-scene>
+  </body>
+</html>
