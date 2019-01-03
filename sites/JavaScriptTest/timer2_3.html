@@ -80,19 +80,12 @@ function getCookie() {
   return "";
 }
 
-function checkCookie() {
-  var time = getCookie();
-  if (time != "") {
-   alert("Time in seconds remaining: " + time);
-  }
-}
-
 function unload() {
 	setCookie("timeValue", secs, 1);
 }
 </script>
 </head>
-<body onload="getCookie(); countdown(); checkCookie();" onunload="unload();">
+<body onload="getCookie(); countdown();" onunload="unload();">
 
 <div id="timer">
 	<h1>Test Page 4</h1>

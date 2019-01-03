@@ -79,13 +79,6 @@ function getCookie(cname) {
   return "";
 }
 
-function checkCookie() {
-  var time = getCookie("username");
-  if (time != "") {
-   alert("Time in seconds remaining: " + time);
-  }
-}
-
 function unload() {
 	setCookie("timeValue", secs, 1);
 }
