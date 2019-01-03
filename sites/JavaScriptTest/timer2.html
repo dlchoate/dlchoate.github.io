@@ -91,7 +91,7 @@ function unload() {
 }
 </script>
 </head>
-<body onunload="unload();">
+<body onload="countdown();" onunload="unload();">
 
 <div id="timer">
 	<h1>Test Page 1</h1>
@@ -107,7 +107,4 @@ function unload() {
 	<a href="timer2_2.html"><h3>Javascript Timer Test Page 3</h3>
 	<a href="timer2_3.html"><h3>Javascript Timer Test Page 4</h3>
 </div>
-<script>
-countdown();
-</script>
 </body>
