@@ -54,37 +54,32 @@ function minusTime(value) {
 	cit = value;
 }
 
-// Sets the cookie where cvalue is the time remaining.
-function setCookie(cname,cvalue,exdays) {
-  var d = new Date();
-  d.setTime(d.getTime() + (exdays*24*60*60*1000));
-  var expires = "expires=" + d.toGMTString();
-  document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+function saveTime() {
+	if (typeof(Storage) !== "undefined") {
+		if (localStorage.timeRemaining) {
+			localStorage.timeRemaining = secs;
+		} else {
+			localStorage.timeRemaining = 4500;
+		}
+	} else {
+		document.getElementById("timer").innerHTML = "Sorry, your browser does not support web storage...";
+	}
 }
 
-// Returns notable string value from cookie caontaining the time remaining, if  nothing is found returns "".
-function getCookie(cname) {
-  var name = cname + "=";
-  var decodedCookie = decodeURIComponent(document.cookie);
-  var ca = decodedCookie.split(';');
-  for(var i = 0; i < ca.length; i++) {
-    var c = ca[i];
-    while (c.charAt(0) == ' ') {
-      c = c.substring(1);
-    }
-    if (c.indexOf(name) == 0) {
-      return c.substring(name.length, c.length);
-    }
-  }
-  return "";
-}
-
-function unload() {
-	setCookie("timeValue", secs, 1);
+function loadTime() {
+	if (typeof(Storage) !== "undefined") {
+		if (localStorage.timeRemaining) {
+			secs = localStorage.timeRemaining;
+		} else {
+			secs = 4500;
+		}
+	} else {
+		document.getElementById("timer").innerHTML = "Sorry, your browser does not support web storage...";
+	}
 }
 </script>
 </head>
-<body onload="countdown();" onunload="unload();">
+<body onload="countdown();" onunload="saveTime();">
 
 <div id="timer">
 	<h1>Test Page 1</h1>
