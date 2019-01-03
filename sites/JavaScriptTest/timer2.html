@@ -56,11 +56,7 @@ function minusTime(value) {
 
 function saveTime() {
 	if (typeof(Storage) !== "undefined") {
-		if (localStorage.timeRemaining) {
-			localStorage.timeRemaining = secs;
-		} else {
-			localStorage.timeRemaining = 4500;
-		}
+		localStorage.setItem("timeRemaining", secs);
 	} else {
 		document.getElementById("timer").innerHTML = "Sorry, your browser does not support web storage...";
 	}
@@ -68,16 +64,13 @@ function saveTime() {
 
 function loadTime() {
 	if (typeof(Storage) !== "undefined") {
-		if (localStorage.timeRemaining) {
-			secs = localStorage.timeRemaining;
-		} else {
-			secs = 4500;
-		}
+		secs = localStorage.getItem("timeRemaining");
 	} else {
 		document.getElementById("timer").innerHTML = "Sorry, your browser does not support web storage...";
 	}
 }
 </script>
+
 </head>
 <body onload="countdown();" onunload="saveTime();">
 
