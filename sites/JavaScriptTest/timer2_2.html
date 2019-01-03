@@ -3,7 +3,7 @@
 <title>Countdown</title>
 <script type="text/javascript">
 // set minutes
-var secs = 4500;
+var secs;
 var cit = 0;
 
 function countdown() {
@@ -63,8 +63,8 @@ function setCookie(cname,cvalue,exdays) {
 }
 
 // Returns notable string value from cookie caontaining the time remaining, if  nothing is found returns "".
-function getCookie(cname) {
-  var name = cname + "=";
+function getCookie() {
+  var name = "timeValue=";
   var decodedCookie = decodeURIComponent(document.cookie);
   var ca = decodedCookie.split(';');
   for(var i = 0; i < ca.length; i++) {
@@ -73,14 +73,15 @@ function getCookie(cname) {
       c = c.substring(1);
     }
     if (c.indexOf(name) == 0) {
-      return c.substring(name.length, c.length);
+      //return c.substring(name.length, c.length);
+	  secs = Number(c.substring(name.length, c.length));
     }
   }
   return "";
 }
 
 function checkCookie() {
-  var time = getCookie("username");
+  var time = getCookie();
   if (time != "") {
    alert("Time in seconds remaining: " + time);
   }
@@ -91,10 +92,10 @@ function unload() {
 }
 </script>
 </head>
-<body onunload="unload();">
+<body onload="getCookie(); countdown(); checkCookie();" onunload="unload();">
 
 <div id="timer">
-	<h1>Test Page 1</h1>
+	<h1>Test Page 3</h1>
 	This is only valid for the next <input id="minutes" type="text" style="width: 56px; border: none; background-color:none; font-size: 16px; font-weight: bold;"> minutes and <input id="seconds" type="text" style="width: 56px; border: none; background-color:none; font-size: 16px; font-weight: bold;"> seconds.
 	<!--Seconds return: <input id="secreturn" type="text" style= "width: 56px; border: none; background-color:none; font-size: 16px; font-weight: bold;">-->
 
@@ -103,11 +104,8 @@ function unload() {
 	<button onclick="minusTime(60)">Minus 1 Minute</button>
 	<button onclick="minusTime(300)">Minus 5 Minutes</button>
 	<button onclick="minusTime(600)">Minus 10 Minutes</button>
+	<a href="timer2.html"><h3>Javascript Timer Test Page 1</h3>
 	<a href="timer2_1.html"><h3>Javascript Timer Test Page 2</h3>
-	<a href="timer2_2.html"><h3>Javascript Timer Test Page 3</h3>
 	<a href="timer2_3.html"><h3>Javascript Timer Test Page 4</h3>
 </div>
-<script>
-countdown();
-</script>
 </body>
