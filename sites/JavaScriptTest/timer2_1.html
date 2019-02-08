@@ -1,10 +1,15 @@
 <html>
 <head>
 <title>Countdown</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
 <script type="text/javascript">
 // set minutes
 var secs;
 var cit = 0;
+var n;
 
 function countdown() {
 	setTimeout('Decrement(0)',1000);
@@ -69,18 +74,29 @@ function loadTime() {
 		document.getElementById("timer").innerHTML = "Sorry, your browser does not support web storage...";
 	}
 }
+
+function displayHint(n) {
+	if (n == 0) {
+		document.getElementById("hint").style.display = "block";
+	}
+	document.getElementById("buttons").style.display = "none";
+}
 </script>
 
 </head>
-<body onload="loadTime(); countdown();" onunload="saveTime();">
+<body onload="loadTime(); countdown();" onunload="saveTime();" class="w3-container w3-display-topmiddle">
 
-<div id="timer">
+<div id="timer" class="w3-blue">
 
-	This is only valid for the next <input id="minutes" type="text" style="width: 56px; border: none; background-color:none; font-size: 16px; font-weight: bold;"> minutes and <input id="seconds" type="text" style="width: 56px; border: none; background-color:none; font-size: 16px; font-weight: bold;"> seconds.
+	This is only valid for the next <input id="minutes" type="text" style="width: 56px; border: none; background-color:none; font-size: 16px; font-weight: bold;" class="w3-blue"> minutes and <input id="seconds" type="text" style="width: 56px; border: none; background-color:none; font-size: 16px; font-weight: bold;" class="w3-blue"> seconds.
 	<!--Seconds return: <input id="secreturn" type="text" style= "width: 56px; border: none; background-color:none; font-size: 16px; font-weight: bold;">-->
 
 </div>
 <div id="buttons">
-	<button onclick="minusTime(300)">Minus 5 Minutes</button>
+	<button onclick="minusTime(300); displayHint(0)">Water Fern Hint</button>
+</div>
+<div id="hint" style="display: none;">
+	<h1>Water Fern Hint</h1>
+	<p>For the edible fern clue, use the provided website to identify ferns that can be eaten.  Then look through the Magical Water Plants book to find a match.  The fern species that occurs in both places, is your answers!
 </div>
 </body>

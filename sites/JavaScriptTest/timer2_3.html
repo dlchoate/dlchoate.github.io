@@ -1,6 +1,10 @@
 <html>
 <head>
 <title>Countdown</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
 <script type="text/javascript">
 // set minutes
 var secs;
@@ -72,15 +76,15 @@ function loadTime() {
 </script>
 
 </head>
-<body onload="loadTime(); countdown();" onunload="saveTime();">
+<body onload="loadTime(); countdown();" onunload="saveTime();" class="w3-container w3-display-topmiddle">
 
-<div id="timer">
+<div id="timer" class="w3-blue">
 
-	This is only valid for the next <input id="minutes" type="text" style="width: 56px; border: none; background-color:none; font-size: 16px; font-weight: bold;"> minutes and <input id="seconds" type="text" style="width: 56px; border: none; background-color:none; font-size: 16px; font-weight: bold;"> seconds.
+	This is only valid for the next <input id="minutes" type="text" style="width: 56px; border: none; background-color:none; font-size: 16px; font-weight: bold;" class="w3-blue"> minutes and <input id="seconds" type="text" style="width: 56px; border: none; background-color:none; font-size: 16px; font-weight: bold;" class="w3-blue"> seconds.
 	<!--Seconds return: <input id="secreturn" type="text" style= "width: 56px; border: none; background-color:none; font-size: 16px; font-weight: bold;">-->
 
 </div>
-<div id="buttons">
+<!--<div id="buttons">
 	<button onclick="minusTime(300)">Minus 5 Minutes</button>
-</div>
+</div>-->
 </body>

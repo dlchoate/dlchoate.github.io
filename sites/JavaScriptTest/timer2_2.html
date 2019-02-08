@@ -1,10 +1,15 @@
 <html>
 <head>
 <title>Countdown</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
 <script type="text/javascript">
 // set minutes
 var secs;
 var cit = 0;
+var n;
 
 function countdown() {
 	setTimeout('Decrement(0)',1000);
@@ -69,18 +74,36 @@ function loadTime() {
 		document.getElementById("timer").innerHTML = "Sorry, your browser does not support web storage...";
 	}
 }
+function displayHint(n) {
+	if (n == 0) {
+		document.getElementById("hint").style.display = "block";
+		document.getElementById("button1").style.display = "none";
+	} else if (n == 1){
+		document.getElementById("hint1").style.display = "block";
+		document.getElementById("button2").style.display = "none";
+	}
+}
 </script>
 
 </head>
-<body onload="loadTime(); countdown();" onunload="saveTime();">
+<body onload="loadTime(); countdown();" onunload="saveTime();" class="w3-container w3-display-topmiddle class="w3-blue">
 
-<div id="timer">
+<div id="timer" class="w3-blue">
 
-	This is only valid for the next <input id="minutes" type="text" style="width: 56px; border: none; background-color:none; font-size: 16px; font-weight: bold;"> minutes and <input id="seconds" type="text" style="width: 56px; border: none; background-color:none; font-size: 16px; font-weight: bold;"> seconds.
+	This is only valid for the next <input id="minutes" type="text" style="width: 56px; border: none; background-color:none; font-size: 16px; font-weight: bold;" class="w3-blue"> minutes and <input id="seconds" type="text" style="width: 56px; border: none; background-color:none; font-size: 16px; font-weight: bold;" class="w3-blue"> seconds.
 	<!--Seconds return: <input id="secreturn" type="text" style= "width: 56px; border: none; background-color:none; font-size: 16px; font-weight: bold;">-->
 
 </div>
 <div id="buttons">
-	<button onclick="minusTime(300)">Minus 5 Minutes</button>
+	<button id="button1" onclick="minusTime(300); displayHint(0)">Cones Hint</button>
+	<button id="button2" onclick="minusTime(300); displayHint(1)">Tree Rings Hint</button>
+</div>
+<div id="hint" style="display: none;">
+	<h1>Cones Hint</h1>
+	<p>For the cones clue, watch the video that talks about the different types of cones.  Then complete the sliding puzzle.  Each piece is numbered and must be placed in order.  When the image is finished, solve the pictogram to see what must be added as your answer!
+</div>
+<div id="hint1" style="display: none;">
+	<h1>Tree Rings Hint</h1>
+	<p>For the tree rings clue, use the virtual die at the bottom of the clue to fill in the blanks in the passage.  One side of the die is marked to answer your clue!
 </div>
 </body>
