@@ -1,0 +1,101 @@
+<html>
+<head>
+<title>Countdownd2</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+<script type="text/javascript">
+// set minutes
+var secs = 4500;
+var cit = 0;
+
+function countdown() {
+	setTimeout('Decrement(0)',1000);
+}
+
+function Decrement() {
+	if (document.getElementById) {
+		minutes = document.getElementById("minutes");
+		seconds = document.getElementById("seconds");
+		
+		// Debugging
+		//secreturn = document.getElementById("secreturn");
+		//secreturn.value = secs;
+		
+		// Change in time
+		if (cit != 0) {
+			secs = secs - cit;
+			cit = 0;
+		}
+		
+		// Only loop until 0
+		if (secs >= 0) {
+			minutes.value = getminutes();
+			seconds.value = getseconds();
+		} else {
+			minutes.value = "EXPIRED";
+			seconds.value = "EXPIRED";
+		}
+
+		secs--;
+		setTimeout('Decrement()',1000);
+	}
+}
+
+function getminutes() {
+	// minutes is seconds divided by 60, rounded down
+	mins = Math.floor(secs / 60);
+	return mins;
+}
+
+function getseconds() {
+	// take mins remaining (as seconds) away from total seconds remaining
+	return secs-Math.round(mins * 60);
+}
+
+function minusTime(value) {
+	cit = value;
+}
+
+function saveTime() {
+	if (typeof(Storage) !== "undefined") {
+		localStorage.setItem("timeRemaining", secs);
+	} else {
+		document.getElementById("timer").innerHTML = "Sorry, your browser does not support web storage...";
+	}
+}
+
+function loadTime() {
+	if (typeof(Storage) !== "undefined") {
+		secs = localStorage.getItem("timeRemaining");
+	} else {
+		document.getElementById("timer").innerHTML = "Sorry, your browser does not support web storage...";
+	}
+}
+
+function displayHint(n) {
+	if (n == 0) {
+		document.getElementById("hint").style.display = "block";
+	}
+	document.getElementById("buttons").style.display = "none";
+}
+</script>
+
+</head>
+<body onload="countdown();" onunload="saveTime();" class="w3-container w3-display-topmiddle">
+
+<div id="timer" class="w3-blue">
+
+	This is only valid for the next <input id="minutes" type="text" style="width: 56px; border: none; background-color:none; font-size: 16px; font-weight: bold;" class="w3-blue"> minutes and <input id="seconds" type="text" style="width: 56px; border: none; background-color:none; font-size: 16px; font-weight: bold;" class="w3-blue"> seconds.
+	<!--Seconds return: <input id="secreturn" type="text" style= "width: 56px; border: none; background-color:none; font-size: 16px; font-weight: bold;">-->
+
+</div>
+<div id="buttons">
+	<button onclick="minusTime(300); displayHint(0)">Cafeteria Hint</button>
+</div>
+<div id="hint" style="display: none;">
+	<h1>Cafeteria Hint</h1>
+	<p>For the Cafeteria Clue, you must complete the ENTIRE game to find the answer to your riddle about the number of bacteria that will fit on the period at the end of a sentence.
+</div>
+</body>
